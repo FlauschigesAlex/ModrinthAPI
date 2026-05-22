@@ -17,7 +17,8 @@ import java.time.ZonedDateTime
 
 @Serializable
 @JsonIgnoreUnknownKeys
-data class ProjectVersion(
+@ConsistentCopyVisibility
+data class ProjectVersion internal constructor(
     val id: String,
     val name: String,
     @SerialName("version_number") val version: SemanticVersion,
@@ -41,6 +42,7 @@ data class ProjectVersion(
         get() = ZonedDateTime.parse(_releaseDate).toInstant()
 
     override fun compareTo(other: ProjectVersion): Int = compareBy<ProjectVersion> { it.version }
+        .thenBy { it.channel }
         .thenBy { it.releaseDate }
         .compare(this, other)
 }
@@ -52,7 +54,7 @@ fun Iterable<ProjectVersion>.initialOrNull() = this.minOrNull()
 fun Iterable<ProjectVersion>.initial() = this.min()
 
 fun Iterable<ProjectVersion>.stability(atLeast: ProjectVersionType) = this.filter { it.channel <= atLeast }
-fun Iterable<ProjectVersion>.channel(channel: ProjectVersionType) = this.filter { it.channel <= channel }
+fun Iterable<ProjectVersion>.channel(channel: ProjectVersionType) = this.filter { it.channel == channel }
 
 typealias ProjectVersionFiles = Collection<ProjectVersionFile>
 fun ProjectVersionFiles.primary() = this.first { it.primary }

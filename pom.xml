@@ -6,7 +6,7 @@
 
     <groupId>at.flauschigesalex.rinth</groupId>
     <artifactId>modrinth-api</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <properties>
         <kotlin.version>2.3.20</kotlin.version>
@@ -20,6 +20,12 @@
             <id>flx-library</id>
             <url>https://repo.flauschigesalex.at/repository/maven-public/</url>
         </repository>
+
+        <!-- PAPERMC -->
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
     </repositories>
     
     <dependencies>
@@ -28,6 +34,7 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -37,6 +44,21 @@
             <scope>compile</scope>
         </dependency>
         
+        <!-- PAPERMC -->
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.21.11-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.velocitypowered</groupId>
+            <artifactId>velocity-api</artifactId>
+            <version>3.5.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+
         <!-- LIBRARY -->
         <dependency>
             <groupId>at.flauschigesalex.lib.base</groupId>

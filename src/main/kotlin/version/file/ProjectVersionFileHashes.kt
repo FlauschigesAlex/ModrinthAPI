@@ -8,7 +8,8 @@ import kotlinx.serialization.json.JsonIgnoreUnknownKeys
 
 @Serializable
 @JsonIgnoreUnknownKeys
-data class ProjectVersionFileHashes(
+@ConsistentCopyVisibility
+data class ProjectVersionFileHashes internal constructor(
     val sha1: String,
     val sha512: String,
 )

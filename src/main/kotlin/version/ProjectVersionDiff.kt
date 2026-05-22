@@ -5,11 +5,15 @@ package at.flauschigesalex.rinth.version
 
 import kotlinx.serialization.ExperimentalSerializationApi
 
-data class ProjectVersionDiff(
-    val newer: ProjectVersion,
-    val older: ProjectVersion,
+@ConsistentCopyVisibility
+data class ProjectVersionDiff internal constructor(
+    val v1: ProjectVersion,
+    val v2: ProjectVersion,
     private val source: Iterable<ProjectVersion>
 ) {
+    val newer = listOf(v1, v2).latest()
+    val older = listOf(v1, v2).initial()
+    
     val indexDifference: Int = source.indexDifference(newer, older)
 }
 
