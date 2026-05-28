@@ -4,9 +4,12 @@ import at.flauschigesalex.lib.base.file.JsonManager
 import at.flauschigesalex.lib.base.file.deserializeOrThrow
 import at.flauschigesalex.lib.base.general.HttpRequestHandler
 import at.flauschigesalex.rinth.version.ProjectVersion
+import at.flauschigesalex.rinth.version.checker.VersionChecker as VC
 
 @Suppress("unused")
 object ModrinthAPI {
+    
+    val VersionChecker = VC
     
     suspend fun findOne(slug: String, loader: String? = null, version: String? = null): Result<ProjectVersion?> =
         this.findAll(slug, loader, version).map { it.firstOrNull() ?: return Result.success(null) }
