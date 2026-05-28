@@ -18,3 +18,9 @@ data class ProjectVersionDiff internal constructor(
 }
 
 fun Iterable<ProjectVersion>.indexDifference(v1: ProjectVersion, v2: ProjectVersion) = this.indexOf(v2) - this.indexOf(v1)
+fun ProjectVersionDiff?.onChanges(invocation: ProjectVersionDiff.() -> Unit) {
+    if (this == null) return
+    if (this.indexDifference <= 0) return
+    
+    this.invocation()
+}
