@@ -18,13 +18,17 @@ data class VersionCheck internal constructor(
     private val channel: ProjectVersionType
 ) {
     
+    companion object {
+        var CACHE_DURATION: Duration = Duration.ofHours(6)
+    }
+    
     private val cacheSlug = "modrinth-version-list@${slug}#${channel}"
 
     suspend fun versions(loader: Set<ModrinthLoader>? = null, minecraftVersion: Set<MinecraftVersion>? = null): Result<Set<ProjectVersion>> = (Cache[cacheSlug] ?: runCatching {
         val versions = ModrinthAPI.findAll(slug, loader?.map { it.name }?.toSet(),  minecraftVersion?.map { it.raw }?.toSet()).getOrThrow().toSet()
         return@runCatching versions
     }.also { Cache.put<Result<Set<ProjectVersion>>>(cacheSlug, CacheEntry(it).apply { 
-        this.expiration = Instant.now() + Duration.ofHours(6)
+        this.expiration = Instant.now() + CACHE_DURATION
     }) }).map { it.stability(channel).toSet() }
     
     suspend fun latestVersion(loader: Set<ModrinthLoader>? = null, minecraftVersion: Set<MinecraftVersion>? = null): Result<ProjectVersion> =
