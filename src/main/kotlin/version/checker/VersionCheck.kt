@@ -40,13 +40,17 @@ data class VersionCheck internal constructor(
     /**
      * @param source A class that is supported by [VersionParser].
      */
-    suspend fun currentVersion(source: Any): Result<ProjectVersion?> = runCatching {
+    suspend fun currentVersion(source: Any): Result<ProjectVersion> = runCatching {
         
         val parser = VersionParser.find { it.clazz.isInstance(source) }
             ?: throw VersionParseException("Failed to find parser for class ${source::class.java.name}.")
         val version = parser.invoke(source, slug)
+            ?: throw VersionParseException("Version cannot be null for class ${source::class.java.name}.")
         
-        return@runCatching versions(parser.loaders, parser.versions).getOrThrow().find { it.version == version }
+        val currentVersion = versions(parser.loaders, parser.versions).getOrThrow().find { it.version == version }
+            ?: throw VersionParseException("Failed to find version ${version} on Modrinth.")
+        
+        return@runCatching currentVersion
     }
 
     /**
@@ -56,7 +60,6 @@ data class VersionCheck internal constructor(
         val versions = this.versions().getOrThrow()
         val version = versions.latestOrNull() ?: return@runCatching null
         val current = this.currentVersion(source).getOrThrow()
-            ?: throw VersionParseException("Current version could not be parsed.")
 
         if (version == current) return@runCatching null
         return@runCatching ProjectVersionDiff(version, current, versions)

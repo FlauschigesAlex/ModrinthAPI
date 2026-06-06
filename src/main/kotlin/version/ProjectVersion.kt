@@ -3,7 +3,7 @@
 
 package at.flauschigesalex.rinth.version
 
-import at.flauschigesalex.lib.base.general.version.SemanticVersion
+import at.flauschigesalex.rinth.utils.serialize.SemanticVersionSerialized
 import at.flauschigesalex.rinth.version.file.ProjectVersionFile
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
@@ -21,7 +21,7 @@ import java.time.ZonedDateTime
 data class ProjectVersion internal constructor(
     val id: String,
     val name: String,
-    @SerialName("version_number") val version: SemanticVersion,
+    @SerialName("version_number") val version: SemanticVersionSerialized,
     @SerialName("version_type") val channel: ProjectVersionType,
     val downloads: Int,
     val changelog: String,

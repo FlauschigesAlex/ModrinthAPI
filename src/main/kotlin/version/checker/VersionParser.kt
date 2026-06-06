@@ -54,9 +54,10 @@ data class VersionParser<T: Any>(val clazz: Class<T>, private val parser: T.(slu
             
             runCatching { // VELOCITY
                 this.add(VersionParser(ProxyServer::class.java) { slug ->
-                    this.pluginManager.getPlugin(slug).getOrNull()?.description?.version?.getOrNull()?.let {
-                        return@let SemanticVersion.parseOrThrow(it)
-                    }
+                    val container = this.pluginManager.plugins.find { it.description.name.getOrNull() == slug }
+                    val version = container?.description?.version?.getOrNull()
+                    
+                    return@VersionParser version?.let { version -> SemanticVersion.parseOrThrow(version) }
                 }.apply {
                     this.loaders = setOf(ModrinthLoader.of("velocity"))
                 })
