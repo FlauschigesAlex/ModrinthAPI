@@ -1,10 +1,10 @@
 @file:Suppress("unused")
 @file:OptIn(ExperimentalSerializationApi::class)
 
-package at.flauschigesalex.rinth.version
+package at.flauschigesalex.rinth.project.version
 
 import at.flauschigesalex.rinth.utils.serialize.SemanticVersionSerialized
-import at.flauschigesalex.rinth.version.file.ProjectVersionFile
+import at.flauschigesalex.rinth.project.version.file.MProjectVersionFile
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,18 +18,18 @@ import java.time.ZonedDateTime
 @Serializable
 @JsonIgnoreUnknownKeys
 @ConsistentCopyVisibility
-data class ProjectVersion internal constructor(
+data class MProjectVersion internal constructor(
     val id: String,
     val name: String,
     @SerialName("version_number") val version: SemanticVersionSerialized,
-    @SerialName("version_type") val channel: ProjectVersionType,
+    @SerialName("version_type") val channel: MProjectVersionType,
     val downloads: Int,
     val changelog: String,
     @SerialName("game_versions") val gameVersions: Set<String> = emptySet(),
     @SerialName("loaders") val loaders: Set<String> = emptySet(),
     @SerialName("date_published") private val _releaseDate: String,
     val files: ProjectVersionFiles,
-): Comparable<ProjectVersion> {
+): Comparable<MProjectVersion> {
     companion object;
     
     @Transient lateinit var slug: String
@@ -41,21 +41,21 @@ data class ProjectVersion internal constructor(
     val releaseDate: Instant
         get() = ZonedDateTime.parse(_releaseDate).toInstant()
 
-    override fun compareTo(other: ProjectVersion): Int = compareBy<ProjectVersion> { it.version }
+    override fun compareTo(other: MProjectVersion): Int = compareBy<MProjectVersion> { it.version }
         .thenBy { it.channel }
         .thenBy { it.releaseDate }
         .compare(this, other)
 }
 
-fun Iterable<ProjectVersion>.latestOrNull() = this.maxOrNull()
-fun Iterable<ProjectVersion>.latest() = this.max()
+fun Iterable<MProjectVersion>.latestOrNull() = this.maxOrNull()
+fun Iterable<MProjectVersion>.latest() = this.max()
 
-fun Iterable<ProjectVersion>.initialOrNull() = this.minOrNull()
-fun Iterable<ProjectVersion>.initial() = this.min()
+fun Iterable<MProjectVersion>.initialOrNull() = this.minOrNull()
+fun Iterable<MProjectVersion>.initial() = this.min()
 
-fun Iterable<ProjectVersion>.stability(atLeast: ProjectVersionType) = this.filter { it.channel <= atLeast }
-fun Iterable<ProjectVersion>.channel(channel: ProjectVersionType) = this.filter { it.channel == channel }
+fun Iterable<MProjectVersion>.stability(atLeast: MProjectVersionType) = this.filter { it.channel <= atLeast }
+fun Iterable<MProjectVersion>.channel(channel: MProjectVersionType) = this.filter { it.channel == channel }
 
-typealias ProjectVersionFiles = Collection<ProjectVersionFile>
+typealias ProjectVersionFiles = Collection<MProjectVersionFile>
 fun ProjectVersionFiles.primary() = this.first { it.primary }
 fun ProjectVersionFiles.primaryOrNull() = this.firstOrNull { it.primary }

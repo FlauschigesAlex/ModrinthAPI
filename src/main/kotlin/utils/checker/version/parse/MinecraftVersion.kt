@@ -1,4 +1,4 @@
-package at.flauschigesalex.rinth.version.checker.parse
+package at.flauschigesalex.rinth.project.version.checker.parse
 
 @ConsistentCopyVisibility
 data class MinecraftVersion private constructor(val raw: String) {

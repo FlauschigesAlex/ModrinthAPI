@@ -1,8 +1,8 @@
-package at.flauschigesalex.rinth.version.checker
+package at.flauschigesalex.rinth.utils.version.checker
 
 import at.flauschigesalex.lib.base.general.version.SemanticVersion
-import at.flauschigesalex.rinth.version.checker.parse.MinecraftVersion
-import at.flauschigesalex.rinth.version.checker.parse.ModrinthLoader
+import at.flauschigesalex.rinth.project.version.checker.parse.MinecraftVersion
+import at.flauschigesalex.rinth.project.version.checker.parse.ModrinthLoader
 import com.velocitypowered.api.plugin.PluginContainer
 import com.velocitypowered.api.proxy.ProxyServer
 import org.bukkit.Bukkit
@@ -11,10 +11,10 @@ import org.bukkit.plugin.java.JavaPlugin
 import kotlin.jvm.optionals.getOrNull
 
 /**
- * Parses the plugin version using the provided parser function.
+ * Parses the plugin project.version using the provided parser function.
  * Supports [JavaPlugin], [ProxyServer] any [PluginContainer] by default.
- * @param clazz The class to parse the version for.
- * @param parser The function to parse the version.
+ * @param clazz The class to parse the project.version for.
+ * @param parser The function to parse the project.version.
  */
 data class VersionParser<T: Any>(val clazz: Class<T>, private val parser: T.(slug: String) -> SemanticVersion?) {
     

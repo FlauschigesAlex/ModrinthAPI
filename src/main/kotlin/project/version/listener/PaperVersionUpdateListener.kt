@@ -1,4 +1,4 @@
-package at.flauschigesalex.rinth.version.listener
+package at.flauschigesalex.rinth.project.version.listener
 
 import net.kyori.adventure.audience.Audience
 import org.bukkit.event.EventHandler

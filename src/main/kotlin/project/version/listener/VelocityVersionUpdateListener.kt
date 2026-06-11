@@ -1,4 +1,4 @@
-package at.flauschigesalex.rinth.version.listener
+package at.flauschigesalex.rinth.project.version.listener
 
 import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.connection.PostLoginEvent

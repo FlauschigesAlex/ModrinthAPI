@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalSerializationApi::class)
 
-package at.flauschigesalex.rinth.version.file
+package at.flauschigesalex.rinth.project.version.file
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
@@ -9,11 +9,11 @@ import kotlinx.serialization.json.JsonIgnoreUnknownKeys
 
 @Serializable
 @JsonIgnoreUnknownKeys
-data class ProjectVersionFile(
+data class MProjectVersionFile(
     val id: String,
     val primary: Boolean,
     val size: Int,
     @SerialName("filename") val name: String,
     val url: String,
-    val hashes: ProjectVersionFileHashes,
+    val hashes: MProjectVersionFileHashes,
 )
