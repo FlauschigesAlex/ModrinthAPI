@@ -1,7 +1,7 @@
 package at.flauschigesalex.rinth.api
 
-import at.flauschigesalex.lib.base.file.JsonManager
-import at.flauschigesalex.lib.base.file.deserializeOrThrow
+import at.flauschigesalex.lib.base.file.json.JsonManager
+import at.flauschigesalex.lib.base.file.json.deserializeOrThrow
 import at.flauschigesalex.lib.base.general.HttpRequestHandler
 import at.flauschigesalex.rinth.project.MProject
 import java.net.URLEncoder
