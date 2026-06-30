@@ -1,13 +1,15 @@
 package at.flauschigesalex.rinth.project.version.listener
 
-import net.kyori.adventure.audience.Audience
+import at.flauschigesalex.lib.base.general.version.SemanticVersion
+import at.flauschigesalex.rinth.project.version.MProjectVersionType
+import at.flauschigesalex.rinth.project.version.toMProjectVersionType
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
 
 @Suppress("unused")
-class PaperVersionUpdateListener(plugin: JavaPlugin, private val invocation: (Audience) -> Unit) : Listener {
+class PaperVersionUpdateListener(plugin: JavaPlugin, private val invocation: MUpdateConsumer) : Listener, MUpdateListener {
     
     private var isRegistered: Boolean = false
     
@@ -19,6 +21,9 @@ class PaperVersionUpdateListener(plugin: JavaPlugin, private val invocation: (Au
         
         isRegistered = true
     }
+    
+    override val version = plugin.pluginMeta.version.let { SemanticVersion.parseOrNull(it) }
+    override val channel = version?.type?.toMProjectVersionType() ?: MProjectVersionType.RELEASE
     
     @EventHandler
     private fun onJoin(event: PlayerJoinEvent) {
