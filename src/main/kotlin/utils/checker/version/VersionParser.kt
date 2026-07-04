@@ -1,8 +1,8 @@
-package at.flauschigesalex.rinth.utils.version.checker
+package at.flauschigesalex.rinth.utils.checker.version
 
 import at.flauschigesalex.lib.base.general.version.SemanticVersion
-import at.flauschigesalex.rinth.project.version.checker.parse.MinecraftVersion
-import at.flauschigesalex.rinth.project.version.checker.parse.ModrinthLoader
+import at.flauschigesalex.rinth.utils.checker.version.parse.MinecraftVersion
+import at.flauschigesalex.rinth.utils.checker.version.parse.ModrinthLoader
 import com.velocitypowered.api.plugin.PluginContainer
 import com.velocitypowered.api.proxy.ProxyServer
 import org.bukkit.Bukkit

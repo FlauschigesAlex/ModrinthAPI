@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package at.flauschigesalex.rinth.project.version.checker
+package at.flauschigesalex.rinth.utils.checker.version
 
 import at.flauschigesalex.rinth.project.version.MProjectVersionType
 

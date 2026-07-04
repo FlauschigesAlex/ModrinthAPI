@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonIgnoreUnknownKeys
 
 @Serializable
+@Suppress("unused")
 @JsonIgnoreUnknownKeys
 data class MProject(
     val slug: String,

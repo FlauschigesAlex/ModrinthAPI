@@ -4,7 +4,7 @@ import at.flauschigesalex.lib.base.file.json.JsonManager
 import at.flauschigesalex.lib.base.file.json.deserializeOrThrow
 import at.flauschigesalex.lib.base.general.HttpRequestHandler
 import at.flauschigesalex.rinth.project.version.MProjectVersion
-import at.flauschigesalex.rinth.project.version.checker.VersionChecker as VC
+import at.flauschigesalex.rinth.utils.checker.version.VersionChecker as VC
 
 @Suppress("unused")
 object ModrinthVersionAPI {

@@ -1,4 +1,4 @@
-package at.flauschigesalex.rinth.project.version.checker.parse
+package at.flauschigesalex.rinth.utils.checker.version.parse
 
 @ConsistentCopyVisibility
 data class ModrinthLoader private constructor(val name: String) {

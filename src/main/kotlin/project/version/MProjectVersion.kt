@@ -3,8 +3,8 @@
 
 package at.flauschigesalex.rinth.project.version
 
-import at.flauschigesalex.rinth.utils.serialize.SemanticVersionSerialized
 import at.flauschigesalex.rinth.project.version.file.MProjectVersionFile
+import at.flauschigesalex.rinth.utils.serialize.SemanticVersionSerialized
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,20 +1,14 @@
 @file:Suppress("unused")
 
-package at.flauschigesalex.rinth.project.version.checker
+package at.flauschigesalex.rinth.utils.checker.version
 
 import at.flauschigesalex.lib.base.general.Cache
 import at.flauschigesalex.lib.base.general.CacheEntry
 import at.flauschigesalex.lib.base.general.version.SemanticVersion
 import at.flauschigesalex.rinth.api.ModrinthVersionAPI
-import at.flauschigesalex.rinth.project.version.MProjectVersion
-import at.flauschigesalex.rinth.project.version.MProjectVersionDifference
-import at.flauschigesalex.rinth.project.version.MProjectVersionType
-import at.flauschigesalex.rinth.project.version.latest
-import at.flauschigesalex.rinth.project.version.latestOrNull
-import at.flauschigesalex.rinth.project.version.stability
-import at.flauschigesalex.rinth.project.version.checker.parse.MinecraftVersion
-import at.flauschigesalex.rinth.project.version.checker.parse.ModrinthLoader
-import at.flauschigesalex.rinth.utils.version.checker.VersionParser
+import at.flauschigesalex.rinth.project.version.*
+import at.flauschigesalex.rinth.utils.checker.version.parse.MinecraftVersion
+import at.flauschigesalex.rinth.utils.checker.version.parse.ModrinthLoader
 import java.time.Duration
 import java.time.Instant
 

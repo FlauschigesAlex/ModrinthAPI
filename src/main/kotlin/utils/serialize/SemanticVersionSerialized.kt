@@ -15,4 +15,4 @@ internal object SemanticVersionSerializer: KSerializer<SemanticVersion> {
     override fun deserialize(decoder: Decoder): SemanticVersion = SemanticVersion.parseOrThrow(decoder.decodeString())
 }
 
-internal typealias SemanticVersionSerialized = @Serializable(SemanticVersionSerializer::class) SemanticVersion
+typealias SemanticVersionSerialized = @Serializable(SemanticVersionSerializer::class) SemanticVersion
