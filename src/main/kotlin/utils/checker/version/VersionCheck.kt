@@ -63,7 +63,8 @@ data class VersionCheck internal constructor(
     suspend fun currentVersionDiff(source: Any): Result<MProjectVersionDifference?> = runCatching { 
         val versions = this.versions().getOrThrow()
         val version = versions.latestOrNull() ?: return@runCatching null
-        val current = this.currentVersion(source).getOrThrow()
+        val current = this.currentVersion(source).getOrNull()
+            ?: return@runCatching MProjectVersionDifference(version, versions.initial(), versions)
 
         if (version == current) return@runCatching null
         return@runCatching MProjectVersionDifference(version, current, versions)
